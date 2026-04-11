@@ -66,7 +66,7 @@ Guided Grad-CAM shows that the model focuses primarily on diseased regions of th
 
 ```bash
 pip install -r requirements.txt
-jupyter notebook notebook/plant_disease_final.ipynb
+jupyter notebook notebook/plant_disease_model_with_grad_cam.ipynb
 ```
 
 ## Code References / Acknowledgements
