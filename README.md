@@ -74,7 +74,7 @@ jupyter notebook notebook/plant_disease_model_with_grad_cam.ipynb
 This project was implemented using PyTorch and transfer learning concepts.  
 The implementation was developed by referring to official documentation and educational resources, which were adapted to the PlantVillage dataset and project requirements.
 
-Model training and experimentation were performed using GPU resources provided by :Manipal University Jaipur[oaicite:0]{index=0}.
+Model training and experimentation were performed using GPU resources provided by :Manipal University Jaipur
 
 ## References / Resources
 
