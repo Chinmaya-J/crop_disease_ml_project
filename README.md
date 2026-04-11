@@ -1,49 +1,73 @@
-# crop_disease_ml_project
-Problem Statement
+# Crop Disease Classification using Transfer Learning
 
-This project aims to classify plant leaf diseases using image-based deep learning methods.
+## Overview
+This project classifies crop leaf diseases using a pretrained MobileNetV3-Small model and the PlantVillage dataset.
 
-📊 Dataset
+The model is trained using transfer learning and evaluated with 3-fold cross-validation.
 
-Dataset: PlantVillage
+## Dataset
+- Dataset: PlantVillage (Pepper, Potato and Tomato subset)
+- Total Images: 20,638
+- Total Classes: 15
 
-Number of classes: XX
+Classes:
+- Pepper Bell Bacterial Spot
+- Pepper Bell Healthy
+- Potato Early Blight
+- Potato Late Blight
+- Potato Healthy
+- Tomato Bacterial Spot
+- Tomato Early Blight
+- Tomato Late Blight
+- Tomato Leaf Mold
+- Tomato Septoria Leaf Spot
+- Tomato Spider Mites
+- Tomato Target Spot
+- Tomato Yellow Leaf Curl Virus
+- Tomato Mosaic Virus
+- Tomato Healthy
 
-Train/Validation split: 80/20
+## Model
+- Backbone: MobileNetV3-Small
+- Pretrained on ImageNet
+- Only the final classifier layer was trained
 
-Image size: 224x224
+## Validation Method
+3-Fold Cross Validation
 
-🧠 Model Architecture
+| Fold | Accuracy |
+|------|------|
+| Fold 1 | 93.24% |
+| Fold 2 | 92.92% |
+| Fold 3 | 93.50% |
 
-Pretrained MobileNetV3 (ImageNet)
+- Mean Accuracy: 93.22%
+- Standard Deviation: 0.24%
+- Best Fold: Fold 3
 
-Final layer modified for disease classes
+## Confusion Matrix
 
-Frozen backbone (transfer learning)
+![Confusion Matrix](results/confusion_matrix.png)
 
-⚙️ Training Details
+## Guided Grad-CAM
 
-Loss Function: CrossEntropyLoss
+![Guided Grad-CAM](results/guided_gradcam.png)
 
-Optimizer: Adam
+## Sample Prediction
 
-Epochs: 3
+![Sample Prediction](results/sample_prediction.png)
 
-Batch size: 32
+## Discussion
+The model performs consistently across folds with very low variance. Most errors occur between visually similar tomato diseases such as Early Blight, Late Blight and Target Spot.
 
-📈 Results
+Guided Grad-CAM shows that the model focuses primarily on diseased regions of the leaf rather than the background.
 
-Validation Accuracy: 92%
+## Run the Project
 
-Confusion matrix included in notebook
-
-🚀 Future Work
-
-Grad-CAM interpretability module
-
-Confidence-based reflection mechanism
-
-Continual learning integration
+```bash
+pip install -r requirements.txt
+jupyter notebook notebook/plant_disease_final.ipynb
+```
 
 ## Code References / Acknowledgements
 
