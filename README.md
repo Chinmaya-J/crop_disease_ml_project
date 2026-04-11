@@ -74,20 +74,33 @@ jupyter notebook notebook/plant_disease_model_with_grad_cam.ipynb
 This project was implemented using PyTorch and transfer learning concepts.  
 The implementation was developed by referring to official documentation and educational resources, which were adapted to the PlantVillage dataset and project requirements.
 
+Model training and experimentation were performed using GPU resources provided by :Manipal University Jaipur[oaicite:0]{index=0}.
+
+## References / Resources
+
+This project was implemented using transfer learning with MobileNetV3-Small in PyTorch and explainability using Guided Grad-CAM.
+
 Primary references:
 
 1. PyTorch Official Documentation  
-   https://pytorch.org/docs/stable/index.html  
+   https://pytorch.org/docs/stable/index.html
 
-2. Torchvision Models Documentation (MobileNet)  
-   https://pytorch.org/vision/stable/models.html  
+2. Torchvision MobileNetV3 Documentation  
+   https://pytorch.org/vision/stable/models/generated/torchvision.models.mobilenet_v3_small.html
 
 3. PyTorch Transfer Learning Tutorial  
-   https://pytorch.org/tutorials/beginner/transfer_learning_tutorial.html  
+   https://pytorch.org/tutorials/beginner/transfer_learning_tutorial.html
 
 4. PlantVillage Dataset  
    Hughes, D. P., & Salathé, M. (2015).  
-   An open access repository of images on plant health to enable the development of mobile disease diagnostics.  
-   https://www.kaggle.com/datasets/emmarex/plantdisease  
+   "An open access repository of images on plant health to enable the development of mobile disease diagnostics."  
+   https://www.kaggle.com/datasets/emmarex/plantdisease
 
-The code structure and training pipeline were adapted and modified specifically for this project.
+5. Grad-CAM Paper  
+   Selvaraju, R. R., Cogswell, M., Das, A., Vedantam, R., Parikh, D., & Batra, D.  
+   "Grad-CAM: Visual Explanations from Deep Networks via Gradient-based Localization."  
+   Proceedings of the IEEE International Conference on Computer Vision (ICCV), 2017.  
+   https://arxiv.org/abs/1610.02391
+
+6. pytorch-grad-cam Library  
+   https://github.com/jacobgil/pytorch-grad-cam
