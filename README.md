@@ -72,7 +72,7 @@ Prediction
 Reliability Assessment
   ↓
 Accept / Flag for Review
-
+```
 
 The current implementation is a prototype and should not yet be interpreted as a final calibrated reliability system.
 
