@@ -28,10 +28,10 @@ Continual learning, long-term memory, and reflection-driven model adaptation are
 
 The current prototype investigates this using:
 
-* prediction confidence,
-* predictive entropy,
-* feature-space familiarity, and
-* Grad-CAM-based visual evidence.
+- prediction confidence,
+- predictive entropy,
+- feature-space familiarity, and
+- Grad-CAM-based visual evidence.
 
 The individual components are established techniques. The research focus is their integration into a reflection-oriented reliability assessment layer for crop disease classification.
 
@@ -47,10 +47,10 @@ $$
 
 where:
 
-* \(C\) = prediction confidence,
-* \(H\) = predictive entropy,
-* \(S\) = feature-space familiarity,
-* \(E\) = explanation evidence from Grad-CAM.
+- \(C\) = prediction confidence,
+- \(H\) = predictive entropy,
+- \(S\) = feature-space familiarity,
+- \(E\) = explanation evidence from Grad-CAM.
 
 The current numerical prototype evaluates:
 
@@ -72,7 +72,7 @@ Prediction
 Reliability Assessment
   ↓
 Accept / Flag for Review
-```
+
 
 The current implementation is a prototype and should not yet be interpreted as a final calibrated reliability system.
 
@@ -140,13 +140,17 @@ Out-of-fold (OOF) predictions are collected so that each image is evaluated usin
 
 These results establish the current PBL-3 baseline before reflection.
 
+### Cross-Validation Results
+
+![Cross-validation results](results/cv_results.png)
+
 ---
 
-## Self-Reflection Prototype
+# Self-Reflection Prototype
 
 The current prototype evaluates three numerical reliability signals.
 
-### 1. Prediction Confidence
+## 1. Prediction Confidence
 
 $$
 C(x)=\max_k p_k
@@ -156,7 +160,7 @@ The maximum predicted class probability provides a direct measure of how concent
 
 ---
 
-### 2. Predictive Entropy
+## 2. Predictive Entropy
 
 $$
 H(x)=-\sum_k p_k\log p_k
@@ -171,7 +175,7 @@ Normalized entropy is used in the current implementation.
 
 ---
 
-### 3. Feature-Space Familiarity
+## 3. Feature-Space Familiarity
 
 The model's internal representation is compared with the prototype of the predicted class using cosine similarity:
 
@@ -188,7 +192,17 @@ This provides a second source of evidence beyond the output probability distribu
 
 ---
 
-## Provisional Reflection Rule
+## Reflection Signal Distributions
+
+The distributions of confidence, normalized entropy, and feature-space familiarity are examined separately for correct and incorrect predictions.
+
+![Reflection signal distributions](results/reflection_signal_distribution.png)
+
+These distributions provide the basis for investigating whether model-internal signals can distinguish reliable predictions from potentially unreliable ones.
+
+---
+
+# Provisional Reflection Rule
 
 The current prototype uses provisional thresholds:
 
@@ -210,19 +224,88 @@ Formal threshold selection, calibration, selective prediction, risk-coverage ana
 
 ---
 
-## Explainability
+# Prototype Reflection Evaluation
+
+The prototype was evaluated using out-of-fold predictions from the 3-fold classification experiment.
+
+### Overall statistics
+
+* Total samples: **20,638**
+* Reflection flagged: **6,574**
+* Reflection rate: **31.85%**
+
+### Individual signals
+
+* Low confidence: **2,853**
+* High entropy: **3,416**
+* Low familiarity: **4,264**
+
+![Reflection evaluation signals](results/reflection_evaluation_signals.png)
+
+### Prediction and reflection statistics
+
+* Incorrect predictions: **1,389**
+* Incorrect predictions flagged: **1,203**
+* Incorrect predictions missed: **186**
+* Correct predictions: **19,249**
+* Correct predictions flagged: **5,371**
+* Correct predictions accepted: **13,878**
+
+The resulting prototype statistics are:
+
+* Apparent error detection rate: **86.61%**
+* False reflection rate: **27.90%**
+
+![Reflection evaluation statistics](results/reflection_evaluation_stats.png)
+
+### Important Evaluation Note
+
+The current thresholds were selected provisionally after inspecting the available out-of-fold signal distributions and then evaluated on the same prototype dataset.
+
+Consequently, the reported **86.61% error detection rate and 27.90% false reflection rate should not be interpreted as final generalization performance**.
+
+A later evaluation phase will use a cleaner threshold-selection and evaluation protocol, together with calibration and selective-prediction analysis.
+
+---
+
+# Explainability with Grad-CAM
 
 Grad-CAM / Guided Grad-CAM is used to visualize regions contributing to the model's prediction.
+
+In the reflection prototype, explanations are particularly useful for examining cases where the model:
+
+* makes a correct prediction and accepts it,
+* makes an incorrect prediction but flags it for review.
 
 The explanations are treated as **qualitative evidence** supporting the reflection process.
 
 They are not interpreted as proof of biological correctness because lesion-level ground-truth localization is not available in the current dataset.
 
+![Reflection and Grad-CAM examples](results/reflection_gradcam.png)
+
 ---
 
-## Current Project Status
+# Existing Baseline Visualizations
 
-### PBL-2 — Completed
+The original classification pipeline also includes the following visual analyses.
+
+### Confusion Matrix
+
+![Confusion Matrix](results/confusion_matrix.png)
+
+### Guided Grad-CAM
+
+![Guided Grad-CAM](results/guided_gradcam.png)
+
+### Sample Prediction
+
+![Sample Prediction](results/sample_prediction.png)
+
+---
+
+# Current Project Status
+
+## PBL-2 — Completed
 
 Established:
 
@@ -232,7 +315,7 @@ Established:
 * cross-validation
 * Grad-CAM-based explainability
 
-### PBL-3 — Current
+## PBL-3 — Current
 
 Developing:
 
@@ -243,7 +326,7 @@ Developing:
 * reflection decision rule
 * initial reflection prototype
 
-### PBL-3 — Next
+## PBL-3 — Next Evaluation Phase
 
 Evaluate whether reflection actually improves decision reliability through:
 
@@ -254,7 +337,7 @@ Evaluate whether reflection actually improves decision reliability through:
 * ablation studies,
 * baseline vs. reflection comparisons.
 
-### PBL-4 — Future
+## PBL-4 — Future
 
 The longer-term system will investigate:
 
@@ -266,35 +349,39 @@ The longer-term system will investigate:
 
 ---
 
-## Repository Structure
+# Repository Structure
 
 ```text
 Crop-Disease-Reflective-AI/
 │
-├── notebooks/
-│   └── plant_disease_reflection_p1.ipynb
-│
-├── data/
-│   └── .gitkeep
-│
 ├── models/
-│   └── .gitkeep
+│   └── best_model.pth
+│
+├── notebook/
+│   ├── plant_disease_baseline_model.ipynb
+│   ├── plant_disease_model_with_grad_cam.ipynb
+│   └── plant_disease_model_with_reflective_prototype.ipynb
 │
 ├── results/
 │   ├── confusion_matrix.png
-│   └── reflection_gradcam_examples.png
+│   ├── cv_results.png
+│   ├── guided_gradcam.png
+│   ├── reflection_evaluation_signals.png
+│   ├── reflection_evaluation_stats.png
+│   ├── reflection_gradcam.png
+│   ├── reflection_signal_distribution.png
+│   └── sample_prediction.png
 │
 ├── README.md
-├── references.md
-├── requirements.txt
-└── .gitignore
+├── index.html
+└── requirements.txt
 ```
 
-The PlantVillage dataset and trained model checkpoints are intentionally excluded from the repository.
+The PlantVillage dataset is not included in the repository.
 
 ---
 
-## Running the Notebook
+# Installation
 
 Create the required Python environment and install the dependencies:
 
@@ -308,19 +395,25 @@ Then launch Jupyter:
 jupyter notebook
 ```
 
-Open:
+Open the notebooks under:
 
 ```text
-notebooks/plant_disease_reflection_p1.ipynb
+notebook/
 ```
 
-The dataset should be placed under the repository's `data/` directory according to the path expected by the notebook.
+The main notebook for the current PBL-3 prototype is:
+
+```text
+notebook/plant_disease_model_with_reflective_prototype.ipynb
+```
+
+The dataset should be placed locally according to the dataset path expected by the notebook.
 
 PyTorch and Torchvision should be installed as a compatible pair appropriate to the available operating system and CUDA configuration.
 
 ---
 
-## Reproducibility
+# Reproducibility
 
 The notebook records the experimental configuration and preserves the outputs from the current prototype run.
 
@@ -330,9 +423,9 @@ Future evaluation will introduce stricter reproducibility controls and independe
 
 ---
 
-## Research References
+# Research References
 
-### Primary reliability reference
+## Primary Reliability Reference
 
 **Zhou, M., Meng, Y., Xu, M., Abdullah, E. R. M. F., Sabri, A. Q. M., & Rahardja, S. (2026).**
 
@@ -344,11 +437,11 @@ DOI: 10.1016/j.engappai.2025.113618
 
 This work is particularly relevant to the project's reliability-oriented direction because it frames plant-disease recognition around determining whether predictions can be trusted and when intervention is preferable for unknown inputs.
 
-Paper: https://doi.org/10.1016/j.engappai.2025.113618
+Paper: [https://doi.org/10.1016/j.engappai.2025.113618](https://doi.org/10.1016/j.engappai.2025.113618)
 
-Public implementation: https://github.com/xml94/SPP4OOD
+Public implementation: [https://github.com/xml94/SPP4OOD](https://github.com/xml94/SPP4OOD)
 
-### Supporting uncertainty reference
+## Supporting Uncertainty Reference
 
 **Hernández, S., & López, J. L. (2020).**
 
@@ -362,16 +455,16 @@ This work provides direct precedent for treating predictive uncertainty as an im
 
 ---
 
-## Technical References
+# Technical References
 
 1. **PyTorch Documentation**
-   https://pytorch.org/docs/stable/index.html
+   [https://pytorch.org/docs/stable/index.html](https://pytorch.org/docs/stable/index.html)
 
 2. **Torchvision MobileNetV3-Small**
-   https://pytorch.org/vision/stable/models/generated/torchvision.models.mobilenet_v3_small.html
+   [https://pytorch.org/vision/stable/models/generated/torchvision.models.mobilenet_v3_small.html](https://pytorch.org/vision/stable/models/generated/torchvision.models.mobilenet_v3_small.html)
 
 3. **PyTorch Transfer Learning Tutorial**
-   https://pytorch.org/tutorials/beginner/transfer_learning_tutorial.html
+   [https://pytorch.org/tutorials/beginner/transfer_learning_tutorial.html](https://pytorch.org/tutorials/beginner/transfer_learning_tutorial.html)
 
 4. **PlantVillage Dataset**
    Hughes, D. P., & Salathé, M. (2015).
@@ -381,14 +474,14 @@ This work provides direct precedent for treating predictive uncertainty as an im
    Selvaraju, R. R., et al. (2017).
    *Grad-CAM: Visual Explanations from Deep Networks via Gradient-based Localization.*
    ICCV 2017.
-   https://arxiv.org/abs/1610.02391
+   [https://arxiv.org/abs/1610.02391](https://arxiv.org/abs/1610.02391)
 
 6. **pytorch-grad-cam**
-   https://github.com/jacobgil/pytorch-grad-cam
+   [https://github.com/jacobgil/pytorch-grad-cam](https://github.com/jacobgil/pytorch-grad-cam)
 
 ---
 
-## Acknowledgements
+# Acknowledgements
 
 This project was developed using PyTorch, Torchvision, and open research resources.
 
@@ -398,7 +491,7 @@ Model training and experimentation were performed using GPU resources provided b
 
 ---
 
-## Research Disclaimer
+# Research Disclaimer
 
 This repository represents an ongoing undergraduate research project.
 
