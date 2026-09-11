@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PBL Presentation | 2026</title>
+    <title>PBL Presentation | Self-Reflective AI</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -13,7 +13,6 @@
 
         body {
             background-color: #0f172a;
-            ;
             color: #f8fafc;
             font-family: 'Plus Jakarta Sans', sans-serif;
             scroll-behavior: smooth;
@@ -31,7 +30,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* TIMER UI - FIXED CONTRAST */
         #timerContainer {
             background: #ffffff;
             color: #020617;
@@ -69,12 +67,14 @@
 
 <body onload="startTimer()">
 
+    <!-- PRESENTATION TIMER -->
     <div id="timerContainer"
         class="fixed bottom-10 right-10 px-8 py-4 rounded-3xl flex items-center gap-4 transition-all">
         <i class="fas fa-hourglass-start text-blue-600 text-2xl" id="timerIcon"></i>
         <span id="displayTime" class="text-4xl font-black font-mono tracking-tighter">00:00</span>
     </div>
 
+    <!-- NAVIGATION -->
     <nav class="fixed w-full z-50 glass border-b border-slate-800/50 px-8 py-4 flex justify-between items-center">
         <div class="flex items-center gap-4">
             <div class="bg-white p-1 rounded flex items-center justify-center shadow-md"
@@ -82,229 +82,564 @@
                 <span class="font-black text-blue-500 text-lg">MUJ</span>
             </div>
             <div class="flex flex-col text-left">
-                <span class="text-xl font-black text-white leading-none uppercase tracking-tighter">PBL <span
-                        class="text-blue-500">2026</span></span>
-                <span class="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">Dept. of Computer Science
-                    & Engineering</span>
+                <span class="text-xl font-black text-white leading-none uppercase tracking-tighter">
+                    PBL <span class="text-blue-500">2026</span>
+                </span>
+                <span class="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">
+                    Dept. of Computer Science & Engineering
+                </span>
             </div>
         </div>
+
         <div class="hidden md:flex gap-8 text-[11px] uppercase tracking-widest font-bold opacity-70">
             <a href="#problem" class="hover:text-blue-400 transition">Problem</a>
             <a href="#methodology" class="hover:text-blue-400 transition">Methodology</a>
-            <a href="#results" class="hover:text-blue-400 transition">Results</a>
+            <a href="#baseline" class="hover:text-blue-400 transition">Baseline</a>
+            <a href="#reflection" class="hover:text-blue-400 transition">Reflection</a>
             <a href="#team" class="hover:text-blue-400 transition">Team</a>
         </div>
     </nav>
 
-    <main class="max-w-6xl mx-auto px-6 pt-48 pb-32 space-y-40">
+    <main class="max-w-6xl mx-auto px-6 pt-48 pb-32 space-y-32">
 
+        <!-- HERO -->
         <section class="text-center">
             <div
                 class="inline-block px-4 py-1 border border-slate-800 rounded-full text-slate-500 text-[22px] font-mono mb-6 uppercase tracking-widest">
-                ID: 2427030604</div>
-            <h1 class="text-6xl md:text-7xl font-extrabold mb-6 uppercase leading-tight">
-                <span class="gradient-text">Self-Reflective and Continually-Learning AI Assistant for Crop Disease
-                    Diagnosis</span>
+                ID: 2427030604
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 uppercase leading-tight">
+                <span class="gradient-text">
+                    Self-Reflective and Continually-Learning AI Assistant for Crop Disease Diagnosis
+                </span>
             </h1>
 
             <h2 class="text-2xl md:text-3xl text-blue-400 font-semibold mb-6">
-                Phase II: Crop Disease Classification using Transfer Learning, Cross-Validation and Guided Grad-CAM
+                PBL-3: Self-Reflection for Reliable Crop Disease Diagnosis
             </h2>
 
             <span class="text-blue-400 text-xl font-semibold block mt-4">
-                MobileNetV3-Small + 3-Fold Cross Validation
+                MobileNetV3-Small + 3-Fold Cross Validation + Reflection Signals
             </span>
 
-            <p class="text-slate-300 max-w-3xl mx-auto text-lg leading-relaxed text-left">
-                This project classifies crop leaf diseases from the PlantVillage dataset using a pretrained
-                MobileNetV3-Small model. The system is evaluated using 3-fold cross-validation and interpreted using
-                Guided Grad-CAM visualizations.
+            <p class="text-slate-300 max-w-4xl mx-auto text-lg leading-relaxed text-left mt-6">
+                This project develops a crop disease diagnosis system that goes beyond classification accuracy
+                by investigating whether a vision model can assess the reliability of its own prediction.
+                The current phase establishes a self-reflection prototype using model-derived confidence,
+                uncertainty and feature-space familiarity, with Grad-CAM providing qualitative explanation evidence.
             </p>
         </section>
 
+        <!-- PROBLEM / RESEARCH QUESTION -->
         <section id="problem" class="grid md:grid-cols-2 gap-12 items-stretch">
             <div class="glass p-10 rounded-[2.5rem] flex flex-col justify-center border-l-2 border-blue-600">
                 <h2 class="text-4xl font-extrabold mb-6">Problem Statement</h2>
-                <p class="text-slate-400 leading-relaxed text-justify">Deep learning models achieve high accuracy in
-                    controlled laboratory datasets such as PlantVillage. However, real-world deployment suffers due to
-                    environmental variations, new disease patterns, and lack of adaptability. As the foundational step
-                    of the proposed adaptive AI assistant, this semester focuses on implementing a robust baseline CNN
-                    model for crop disease classification.</p>
+                <p class="text-slate-400 leading-relaxed text-justify">
+                    A high-confidence prediction is not necessarily a reliable prediction.
+                    In crop disease diagnosis, visually similar disease classes and unfamiliar
+                    samples can cause a model to make incorrect predictions while remaining confident.
+                    Therefore, the system needs an additional mechanism that can assess prediction
+                    reliability rather than relying only on the predicted class.
+                </p>
             </div>
+
             <div class="space-y-6">
                 <div class="glass p-7 rounded-3xl border-r-2 border-blue-500/50">
-                    <h3 class="text-blue-400 font-bold text-xs uppercase tracking-widest mb-2">Literature Review</h3>
-                    <p class="text-base text-slate-300 leading-relaxed">Existing research demonstrates high performance
-                        of CNN-based models such as ResNet and MobileNet for plant disease detection. However, most
-                        systems remain static and lack adaptability or self-reflection mechanisms. This project builds
-                        upon established CNN approaches as a baseline before integrating reflective and continual
-                        learning components.</p>
+                    <h3 class="text-blue-400 font-bold text-xs uppercase tracking-widest mb-3">
+                        Research Question
+                    </h3>
+                    <p class="text-xl text-slate-200 leading-relaxed font-semibold">
+                        “Can a vision model assess the reliability of its own prediction using additional
+                        model-derived evidence?”
+                    </p>
                 </div>
+
                 <div class="glass p-7 rounded-3xl border-r-2 border-purple-500/50">
-                    <h3 class="text-purple-400 font-bold text-xs uppercase tracking-widest mb-2">Research Gap</h3>
-                    <p class="text-base text-slate-300 leading-relaxed">While prior works achieve high accuracy, they do
-                        not incorporate adaptive or reflective mechanisms. Before implementing reflection and continual
-                        learning, it is necessary to establish a strong and reliable baseline vision model. This
-                        semester addresses that foundational requirement.</p>
+                    <h3 class="text-purple-400 font-bold text-xs uppercase tracking-widest mb-3">
+                        Research Direction
+                    </h3>
+                    <p class="text-base text-slate-300 leading-relaxed">
+                        Established prediction signals are combined into a reflection-oriented decision layer.
+                        The individual components are not claimed as novel; the present contribution is their
+                        integration and subsequent empirical evaluation for crop-disease classification.
+                    </p>
                 </div>
             </div>
         </section>
 
+        <!-- METHODOLOGY -->
         <section id="methodology" class="space-y-12">
-            <h2 class="text-4xl font-black text-center uppercase tracking-tight">System <span
-                    class="text-blue-500">Methodology</span></h2>
+            <h2 class="text-4xl font-black text-center uppercase tracking-tight">
+                Baseline <span class="text-blue-500">Methodology</span>
+            </h2>
+
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="glass p-8 rounded-3xl text-center">
                     <i class="fas fa-database text-blue-500 text-4xl mb-4"></i>
                     <h3 class="font-bold mb-2 uppercase text-xs tracking-widest">Dataset & Preprocessing</h3>
                     <p class="text-base text-slate-300 leading-relaxed">
-                        Dataset: PlantVillage subset containing Pepper, Potato and Tomato diseases.<br>
+                        PlantVillage subset containing Pepper, Potato and Tomato diseases.<br>
                         20,638 images across 15 classes.<br>
                         Images resized to 224×224 and normalized.<br>
-                        3-Fold Cross Validation used for evaluation.
+                        Stratified 3-Fold Cross Validation.
                     </p>
                 </div>
+
                 <div class="glass p-8 rounded-3xl text-center">
                     <i class="fas fa-microchip text-purple-500 text-4xl mb-4"></i>
-                    <h3 class="font-bold mb-2 uppercase text-xs tracking-widest">Model & Training Strategy</h3>
+                    <h3 class="font-bold mb-2 uppercase text-xs tracking-widest">Model & Training</h3>
                     <p class="text-base text-slate-300 leading-relaxed">
-                        Pretrained MobileNetV3-Small (ImageNet weights)<br>
-                        Frozen backbone for transfer learning<br>
-                        Final classifier layer retrained for 15 disease classes<br>
-                        Loss: CrossEntropyLoss<br>
-                        Optimizer: Adam<br>
-                        Epochs per Fold: 10
+                        MobileNetV3-Small with ImageNet weights.<br>
+                        Frozen feature extractor.<br>
+                        Final classifier retrained for 15 classes.<br>
+                        CrossEntropyLoss + Adam.<br>
+                        10 epochs per fold.
                     </p>
                 </div>
+
                 <div class="glass p-8 rounded-3xl text-center border-2 border-green-500/20 bg-green-500/5">
                     <i class="fab fa-python text-green-500 text-4xl mb-4"></i>
-                    <h3 class="font-bold mb-4 uppercase text-xs tracking-widest text-green-400">Live Execution</h3>
+                    <h3 class="font-bold mb-4 uppercase text-xs tracking-widest text-green-400">Implementation</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed mb-5">
+                        Python-based experimental pipeline with PyTorch,
+                        scikit-learn and Grad-CAM.
+                    </p>
                     <a href="https://github.com/Chinmaya-J/crop_disease_ml_project" target="_blank"
-                        class="px-6 py-2 bg-green-600 rounded-full text-[10px] font-black hover:bg-green-500 transition shadow-lg shadow-green-900/40">VIEW
-                        CODE / DEMO</a>
+                        class="inline-block px-6 py-2 bg-green-600 rounded-full text-[10px] font-black hover:bg-green-500 transition shadow-lg shadow-green-900/40">
+                        VIEW CODE / DEMO
+                    </a>
                 </div>
             </div>
         </section>
 
-        <section id="results" class="glass p-12 rounded-[3.5rem] border-t-2 border-blue-500">
-            <h2 class="text-4xl font-black mb-12 text-center uppercase tracking-tight">Results & <span
-                    class="text-blue-500">Analysis</span></h2>
+        <!-- BASELINE RESULTS -->
+        <section id="baseline" class="glass p-12 rounded-[3.5rem] border-t-2 border-blue-500">
+            <h2 class="text-4xl font-black mb-12 text-center uppercase tracking-tight">
+                Baseline <span class="text-blue-500">Results</span>
+            </h2>
+
             <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div class="h-80"><canvas id="resultsChart"></canvas></div>
+                <div class="h-80">
+                    <canvas id="resultsChart"></canvas>
+                </div>
+
                 <div class="space-y-6">
                     <div
                         class="p-6 rounded-2xl bg-white/5 flex justify-between items-center border border-white/10 shadow-inner">
-                        <span class="text-slate-400 font-bold uppercase text-xs tracking-widest">Accuracy /
-                            Performance</span>
-                        <span class="text-blue-400 font-mono font-black text-4xl">93.22%</span>
+                        <span class="text-slate-400 font-bold uppercase text-xs tracking-widest">Mean Accuracy</span>
+                        <span class="text-blue-400 font-mono font-black text-4xl">93.27%</span>
                     </div>
-                    <p class="text-base text-slate-300 leading-relaxed">
-                        The MobileNetV3-Small transfer learning model achieved a mean accuracy of 93.22% across 3 folds,
-                        with fold accuracies of 93.24%, 92.92% and 93.50%. The model remained stable with very low
-                        variance (0.24%), indicating reliable generalization across the dataset.
-                    </p>
 
                     <p class="text-base text-slate-300 leading-relaxed">
-                        Most misclassifications occurred between visually similar tomato diseases such as Early Blight,
-                        Late Blight and Target Spot. Guided Grad-CAM was used to verify that the model focuses on
-                        diseased regions of the leaf rather than the background.
+                        The MobileNetV3-Small baseline achieved a mean accuracy of
+                        <strong class="text-slate-100">93.27% ± 0.14%</strong>
+                        across three stratified folds.
                     </p>
-                    <p class="text-sm text-green-400 mt-4">
-                        Implemented: 3-fold cross-validation, confusion matrix visualization and Guided Grad-CAM based
-                        interpretability.
+
+                    <div class="grid grid-cols-3 gap-3 text-center">
+                        <div class="bg-white/5 rounded-xl p-4">
+                            <p class="text-xs text-slate-500 uppercase tracking-widest">Fold 1</p>
+                            <p class="text-xl font-black text-slate-100 mt-1">93.28%</p>
+                        </div>
+                        <div class="bg-white/5 rounded-xl p-4">
+                            <p class="text-xs text-slate-500 uppercase tracking-widest">Fold 2</p>
+                            <p class="text-xl font-black text-slate-100 mt-1">93.43%</p>
+                        </div>
+                        <div class="bg-white/5 rounded-xl p-4">
+                            <p class="text-xs text-slate-500 uppercase tracking-widest">Fold 3</p>
+                            <p class="text-xl font-black text-slate-100 mt-1">93.09%</p>
+                        </div>
+                    </div>
+
+                    <p class="text-sm text-green-400">
+                        Baseline established using stratified 3-fold cross-validation and
+                        out-of-fold predictions.
                     </p>
                 </div>
             </div>
         </section>
 
+        <!-- BASELINE OUTPUTS -->
         <section class="space-y-10">
             <h2 class="text-4xl font-black text-center uppercase tracking-tight">
-                Explainability <span class="text-blue-500">& Outputs</span>
+                Baseline <span class="text-blue-500">Outputs</span>
             </h2>
 
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="glass p-6 rounded-3xl">
                     <img src="results/confusion_matrix.png" class="rounded-2xl mb-4" alt="Confusion Matrix">
                     <p class="text-sm text-slate-300 text-center">
-                        Confusion Matrix showing strong diagonal dominance and limited confusion between similar tomato
-                        diseases.
+                        Confusion matrix showing the class-wise performance of the baseline model.
                     </p>
                 </div>
 
                 <div class="glass p-6 rounded-3xl">
                     <img src="results/guided_gradcam.png" class="rounded-2xl mb-4" alt="Guided Grad-CAM">
                     <p class="text-sm text-slate-300 text-center">
-                        Guided Grad-CAM visualization highlighting the diseased region used for prediction.
+                        Guided Grad-CAM visualization showing image regions contributing to a prediction.
                     </p>
                 </div>
 
                 <div class="glass p-6 rounded-3xl">
                     <img src="results/sample_prediction.png" class="rounded-2xl mb-4" alt="Sample Prediction">
                     <p class="text-sm text-slate-300 text-center">
-                        Example prediction from the trained model with correct disease classification.
+                        Example prediction from the trained crop disease classifier.
                     </p>
                 </div>
             </div>
         </section>
 
+        <!-- SELF REFLECTION -->
+        <section id="reflection" class="space-y-12">
+
+            <div class="text-center">
+                <span class="text-purple-400 text-xs font-black uppercase tracking-[0.4em]">
+                    PBL-3 Current Phase
+                </span>
+                <h2 class="text-5xl font-black uppercase tracking-tight mt-3">
+                    Self-<span class="gradient-text">Reflection Prototype</span>
+                </h2>
+                <p class="text-slate-400 max-w-3xl mx-auto mt-5 leading-relaxed">
+                    The model's prediction is augmented with additional evidence to estimate
+                    whether the prediction should be accepted or flagged for review.
+                </p>
+            </div>
+
+            <!-- FORMULATION -->
+            <div class="glass p-10 rounded-[2.5rem] border-l-2 border-purple-500">
+                <h3 class="text-purple-400 font-bold text-xs uppercase tracking-widest mb-5">
+                    Reflection Formulation
+                </h3>
+
+                <div class="text-center text-3xl md:text-4xl font-mono text-slate-100 mb-8">
+                    R(x) = g(C, H, S, E)
+                </div>
+
+                <div class="grid md:grid-cols-4 gap-4 text-center">
+                    <div class="bg-white/5 rounded-2xl p-5">
+                        <p class="text-blue-400 font-black text-2xl">C</p>
+                        <p class="text-xs uppercase tracking-widest text-slate-500 mt-2">Confidence</p>
+                    </div>
+                    <div class="bg-white/5 rounded-2xl p-5">
+                        <p class="text-purple-400 font-black text-2xl">H</p>
+                        <p class="text-xs uppercase tracking-widest text-slate-500 mt-2">Entropy</p>
+                    </div>
+                    <div class="bg-white/5 rounded-2xl p-5">
+                        <p class="text-green-400 font-black text-2xl">S</p>
+                        <p class="text-xs uppercase tracking-widest text-slate-500 mt-2">Familiarity</p>
+                    </div>
+                    <div class="bg-white/5 rounded-2xl p-5">
+                        <p class="text-orange-400 font-black text-2xl">E</p>
+                        <p class="text-xs uppercase tracking-widest text-slate-500 mt-2">Evidence</p>
+                    </div>
+                </div>
+
+                <p class="text-sm text-slate-400 text-center mt-7 leading-relaxed">
+                    Current numerical prototype uses C, H and S.
+                    E is incorporated qualitatively through Grad-CAM because region-level ground-truth
+                    annotations are not available for the present dataset.
+                </p>
+            </div>
+
+            <!-- SIGNALS -->
+            <div>
+                <h3 class="text-3xl font-black uppercase text-center mb-8">
+                    Reflection <span class="text-blue-500">Signals</span>
+                </h3>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="glass p-8 rounded-3xl">
+                        <i class="fas fa-chart-line text-blue-500 text-3xl mb-5"></i>
+                        <h4 class="font-black uppercase text-sm tracking-widest mb-3">Confidence</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Maximum softmax probability used as the model's direct confidence signal.
+                        </p>
+                    </div>
+
+                    <div class="glass p-8 rounded-3xl">
+                        <i class="fas fa-wave-square text-purple-500 text-3xl mb-5"></i>
+                        <h4 class="font-black uppercase text-sm tracking-widest mb-3">Uncertainty</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Prediction entropy measures how concentrated or distributed the class probabilities are.
+                        </p>
+                    </div>
+
+                    <div class="glass p-8 rounded-3xl">
+                        <i class="fas fa-project-diagram text-green-500 text-3xl mb-5"></i>
+                        <h4 class="font-black uppercase text-sm tracking-widest mb-3">Familiarity</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Cosine similarity between the sample embedding and the prototype of its predicted class.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RULE -->
+            <div class="glass p-10 rounded-[2.5rem] border-t-2 border-purple-500 text-center">
+                <h3 class="text-purple-400 font-bold text-xs uppercase tracking-widest mb-5">
+                    Provisional Reflection Rule
+                </h3>
+
+                <div class="text-xl md:text-2xl font-mono text-slate-100 leading-relaxed">
+                    Flag if:
+                    <span class="text-blue-400">C &lt; 0.80</span>
+                    OR
+                    <span class="text-purple-400">H<sub>norm</sub> &gt; 0.20</span>
+                    OR
+                    <span class="text-green-400">S &lt; 0.75</span>
+                </div>
+
+                <p class="text-sm text-slate-500 mt-5">
+                    Thresholds are provisional and will be rigorously selected and evaluated in the next phase.
+                </p>
+            </div>
+
+            <!-- REFLECTION EVALUATION -->
+            <div class="glass p-10 rounded-[3rem]">
+                <h3 class="text-3xl font-black text-center uppercase mb-10">
+                    Prototype <span class="text-blue-500">Evaluation</span>
+                </h3>
+
+                <div class="grid md:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <img src="results/reflection_evaluation_stats.png" class="rounded-2xl mb-6 w-full"
+                            alt="Reflection Evaluation Statistics">
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-white/5 rounded-2xl p-5 text-center">
+                                <p class="text-xs text-slate-500 uppercase tracking-widest">Flagged</p>
+                                <p class="text-3xl font-black text-purple-400 mt-2">31.85%</p>
+                            </div>
+                            <div class="bg-white/5 rounded-2xl p-5 text-center">
+                                <p class="text-xs text-slate-500 uppercase tracking-widest">Incorrect Flagged</p>
+                                <p class="text-3xl font-black text-green-400 mt-2">86.61%</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <img src="results/reflection_evaluation_signals.png" class="rounded-2xl mb-6 w-full"
+                            alt="Reflection Signal Evaluation">
+
+                        <p class="text-base text-slate-300 leading-relaxed">
+                            On the current out-of-fold prototype, the reflection rule flagged
+                            6,574 of 20,638 predictions. Of 1,389 incorrect predictions,
+                            1,203 were flagged while 186 were missed.
+                        </p>
+
+                        <p class="text-sm text-amber-400 mt-5 leading-relaxed">
+                            These values are exploratory prototype diagnostics, not final
+                            leakage-free reflection performance. The thresholds were selected
+                            after inspecting the same out-of-fold signal distributions and must
+                            be validated on a clean evaluation protocol.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SIGNAL DISTRIBUTION -->
+            <div class="glass p-10 rounded-[3rem]">
+                <h3 class="text-3xl font-black text-center uppercase mb-8">
+                    Signal <span class="text-blue-500">Distribution</span>
+                </h3>
+
+                <img src="results/reflection_signal_distribution.png" class="rounded-2xl max-w-5xl mx-auto w-full"
+                    alt="Reflection Signal Distribution">
+
+                <p class="text-sm text-slate-500 text-center mt-5">
+                    Out-of-fold distributions of confidence, normalized entropy and feature-space familiarity.
+                </p>
+            </div>
+
+            <!-- REFLECTION + GRAD CAM -->
+            <div class="glass p-10 rounded-[3rem] border-b-2 border-orange-500/50">
+                <h3 class="text-3xl font-black text-center uppercase mb-8">
+                    Reflection + <span class="text-orange-400">Grad-CAM</span>
+                </h3>
+
+                <div class="grid md:grid-cols-2 gap-10 items-center">
+                    <img src="results/reflection_gradcam.png" class="rounded-2xl w-full" alt="Reflection Grad-CAM">
+
+                    <div>
+                        <p class="text-base text-slate-300 leading-relaxed">
+                            Grad-CAM provides qualitative evidence for the reflection layer by
+                            showing which image regions contributed to the prediction.
+                        </p>
+
+                        <p class="text-base text-slate-400 leading-relaxed mt-5">
+                            The current implementation does not treat Grad-CAM as a numerical
+                            reliability score. Instead, it acts as complementary explanation evidence
+                            while the numerical prototype relies on confidence, entropy and familiarity.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FUTURE WORK -->
+        <section class="space-y-10">
+
+            <div class="text-center">
+                <span class="text-purple-400 text-xs font-black uppercase tracking-[0.4em]">
+                    PBL-3 Final Work
+                </span>
+
+                <h2 class="text-4xl font-black text-center uppercase tracking-tight mt-3">
+                    Future <span class="text-blue-500">Work</span>
+                </h2>
+
+                <p class="text-slate-400 max-w-3xl mx-auto mt-5 leading-relaxed">
+                    The current reflection layer is a prototype. The remaining work focuses on
+                    rigorously evaluating whether these signals provide a measurable reliability benefit.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+
+                <div class="glass p-8 rounded-3xl border-t-2 border-blue-500">
+                    <p class="text-blue-400 text-xs font-black uppercase tracking-widest mb-3">
+                        01 — Threshold Selection
+                    </p>
+                    <h3 class="font-black text-xl mb-4">
+                        Rigorous Threshold Selection
+                    </h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Replace the current provisional thresholds with thresholds selected
+                        using a leakage-free validation protocol.
+                    </p>
+                </div>
+
+                <div class="glass p-8 rounded-3xl border-t-2 border-purple-500">
+                    <p class="text-purple-400 text-xs font-black uppercase tracking-widest mb-3">
+                        02 — Evaluation
+                    </p>
+                    <h3 class="font-black text-xl mb-4">
+                        Reflection Performance
+                    </h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Measure error detection, false reflection rate, precision and
+                        selective prediction using risk–coverage analysis.
+                    </p>
+                </div>
+
+                <div class="glass p-8 rounded-3xl border-t-2 border-green-500">
+                    <p class="text-green-400 text-xs font-black uppercase tracking-widest mb-3">
+                        03 — Ablation
+                    </p>
+                    <h3 class="font-black text-xl mb-4">
+                        Signal Contribution
+                    </h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Compare individual and combined reflection signals to determine
+                        how much each signal contributes to reliability assessment.
+                    </p>
+                </div>
+
+                <div class="glass p-8 rounded-3xl border-t-2 border-orange-500">
+                    <p class="text-orange-400 text-xs font-black uppercase tracking-widest mb-3">
+                        04 — Calibration
+                    </p>
+                    <h3 class="font-black text-xl mb-4">
+                        Reliability Analysis
+                    </h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Evaluate whether model confidence corresponds to actual correctness
+                        using calibration and reliability analysis.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="glass p-8 rounded-3xl text-center border-b-2 border-blue-500">
+                <p class="text-slate-400 text-sm leading-relaxed">
+                    <span class="text-slate-200 font-bold">PBL-3 Goal:</span>
+                    Establish whether the proposed reflection layer provides a measurable
+                    reliability benefit beyond the baseline classifier.
+                </p>
+            </div>
+
+        </section>
+
+        <!-- ACADEMIC CREDITS -->
         <section id="team" class="text-center pt-10 border-t border-slate-900">
-            <h2 class="text-xs font-black text-slate-600 uppercase tracking-[0.5em] mb-12">Academic Credits</h2>
+            <h2 class="text-xs font-black text-slate-600 uppercase tracking-[0.5em] mb-12">
+                Academic Credits
+            </h2>
+
             <div class="flex flex-wrap justify-center gap-10">
                 <div class="glass px-12 py-8 rounded-[2rem] border-b-2 border-blue-600">
                     <p class="text-xs font-bold text-blue-500 mb-2 uppercase tracking-widest">Project Guide</p>
                     <p class="font-black text-xl text-slate-100">Dr. Amit Kumar Gupta</p>
                 </div>
+
                 <div class="glass px-12 py-8 rounded-[2rem] border-b-2 border-slate-700">
                     <p class="text-xs font-bold text-slate-400 mb-2 uppercase tracking-widest">Student Name</p>
                     <p class="font-black text-xl text-slate-100">Chinmaya</p>
                     <p class="text-xs text-slate-500 mt-1">2427030604</p>
                 </div>
-                <div class="glass px-12 py-8 rounded-[2rem] border-b-2 border-green-600">
-                    <p class="text-xs font-bold text-green-400 mb-2 uppercase tracking-widest">Project Status</p>
-                    <p class="font-black text-xl text-slate-100">Phase II Completed</p>
-                    <p class="text-xs text-slate-500 mt-1">Cross-Validation + Guided Grad-CAM</p>
+
+                <div class="glass px-12 py-8 rounded-[2rem] border-b-2 border-purple-600">
+                    <p class="text-xs font-bold text-purple-400 mb-2 uppercase tracking-widest">Project Status</p>
+                    <p class="font-black text-xl text-slate-100">PBL-3: Self-Reflection</p>
+                    <p class="text-xs text-slate-500 mt-1">Prototype Evaluation in Progress</p>
                 </div>
             </div>
         </section>
+
     </main>
 
     <footer class="py-12 text-center bg-black/40 border-t border-slate-900">
-        <p class="text-slate-600 text-[10px] font-bold tracking-[0.3em] uppercase mb-2">Manipal University Jaipur</p>
-        <p class="text-slate-500 text-[9px] font-medium tracking-[0.2em] uppercase opacity-50">Department of Computer
-            Science & Engineering • 2026</p>
+        <p class="text-slate-600 text-[10px] font-bold tracking-[0.3em] uppercase mb-2">
+            Manipal University Jaipur
+        </p>
+        <p class="text-slate-500 text-[9px] font-medium tracking-[0.2em] uppercase opacity-50">
+            Department of Computer Science & Engineering • 2026
+        </p>
     </footer>
 
     <script>
-        // TIMER LOGIC
+        // PRESENTATION TIMER
         let sec = 0;
         let timer = null;
+
         function startTimer() {
             timer = setInterval(() => {
                 sec++;
+
                 let m = Math.floor(sec / 60);
                 let s = sec % 60;
-                document.getElementById('displayTime').innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
 
-                if (sec >= 480 && sec < 600) { // 8-10 Mins Warning
+                document.getElementById('displayTime').innerText =
+                    `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+
+                if (sec >= 480 && sec < 600) {
                     document.getElementById('timerContainer').classList.add('timer-warning');
-                    document.getElementById('timerIcon').classList.replace('fa-hourglass-start', 'fa-hourglass-half');
-                } else if (sec >= 600) { // 10 Mins Stop
+                    document.getElementById('timerIcon').classList.replace(
+                        'fa-hourglass-start', 'fa-hourglass-half'
+                    );
+                } else if (sec >= 600) {
                     clearInterval(timer);
-                    document.getElementById('timerContainer').classList.replace('timer-warning', 'timer-stop');
+                    document.getElementById('timerContainer').classList.replace(
+                        'timer-warning', 'timer-stop'
+                    );
                     document.getElementById('displayTime').innerText = "10:00";
-                    document.getElementById('timerIcon').classList.replace('fa-hourglass-half', 'fa-hourglass-end');
+                    document.getElementById('timerIcon').classList.replace(
+                        'fa-hourglass-half', 'fa-hourglass-end'
+                    );
                 }
             }, 1000);
         }
 
-        // RESULTS CHART (Demo Data)
+        // BASELINE CROSS-VALIDATION RESULTS
         const ctx = document.getElementById('resultsChart').getContext('2d');
+
         new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: ['Fold 1', 'Fold 2', 'Fold 3'],
                 datasets: [{
-                    data: [93.24, 92.92, 93.50],
+                    data: [93.2849, 93.4293, 93.0949],
                     backgroundColor: ['#3b82f6'],
                     borderRadius: 15,
                     barThickness: 40
@@ -315,8 +650,16 @@
                 maintainAspectRatio: false,
                 plugins: { legend: { display: false } },
                 scales: {
-                    y: { beginAtZero: true, grid: { color: '#ffffff05' }, ticks: { color: '#475569' } },
-                    x: { grid: { display: false }, ticks: { color: '#475569' } }
+                    y: {
+                        min: 90,
+                        max: 95,
+                        grid: { color: '#ffffff05' },
+                        ticks: { color: '#94a3b8' }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#94a3b8' }
+                    }
                 }
             }
         });
