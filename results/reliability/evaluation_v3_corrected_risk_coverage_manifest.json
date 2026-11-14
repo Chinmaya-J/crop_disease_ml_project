@@ -1,0 +1,30 @@
+{
+  "analysis": "Corrected v3 held-out risk-coverage evaluation",
+  "input": "/kaggle/working/plant_disease_experiments/results/evaluation_v3_corrected/evaluation_v3_corrected_test_predictions.csv",
+  "risk_score_source": "Risk_score from the corrected v3 logistic reflection models; baseline uses low-confidence risk score.",
+  "acceptance_rule": "Samples are accepted in ascending predicted error-risk order.",
+  "risk_definition": "Cumulative classification errors divided by accepted samples.",
+  "aurc": "Trapezoidal area under the risk-coverage curve.",
+  "partitions": {
+    "folds": [
+      1,
+      2,
+      3
+    ],
+    "split_seeds": [
+      20261109,
+      20262109
+    ],
+    "test_samples_per_partition": 1720,
+    "partitions_per_architecture": 6
+  },
+  "bootstrap": {
+    "replicates": 10000,
+    "seed": 20261111,
+    "sampling": "Paired image-cluster bootstrap, stratified by OOF fold; image multiplicities shared across split seeds.",
+    "unadjusted_interval": "95% percentile interval",
+    "bonferroni_family_size": 18,
+    "bonferroni_interval": "99.7222% two-sided family-wise percentile interval"
+  },
+  "cnn_retraining": false
+}

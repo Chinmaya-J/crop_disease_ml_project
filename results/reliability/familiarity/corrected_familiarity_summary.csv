@@ -1,0 +1,4 @@
+Architecture,Samples,Errors,Familiarity_mean,Familiarity_correct_mean,Familiarity_error_mean,Low_familiarity_AUROC,Low_familiarity_AP,Output
+MobileNetV3-Small,20638,1377,0.7866468041549506,0.7898147348636978,0.7423348844881503,0.6328552053571931,0.14469727202729943,/kaggle/working/plant_disease_experiments/results/familiarity_recomputed/mobilenetv3_small_corrected.npz
+ResNet18,20638,1376,0.818852460474517,0.8200627034389298,0.8019108180468149,0.678961189702342,0.11423532520244284,/kaggle/working/plant_disease_experiments/results/familiarity_recomputed/resnet18_corrected.npz
+EfficientNet-B0,20638,1103,0.48594715252062565,0.48881522742178835,0.4351512838042027,0.6265320561625332,0.08127559501761816,/kaggle/working/plant_disease_experiments/results/familiarity_recomputed/efficientnet_b0_corrected.npz

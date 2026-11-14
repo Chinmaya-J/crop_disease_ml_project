@@ -1,0 +1,38 @@
+{
+  "experiment": "PBL-3 corrected reflection evaluation v3",
+  "dataset_size": 20638,
+  "number_of_classes": 15,
+  "architectures": [
+    "MobileNetV3-Small",
+    "ResNet18",
+    "EfficientNet-B0"
+  ],
+  "signals": {
+    "C": "1 - maximum softmax probability",
+    "H": "Predictive entropy normalized by log(number of classes)",
+    "S": "1 - cosine similarity to predicted-class prototype"
+  },
+  "familiarity_source": "Corrected fold-consistent familiarity extraction",
+  "familiarity_validation": "Zero prediction mismatches for all architectures and folds",
+  "baseline": "Low confidence (1 - maximum softmax probability)",
+  "meta_model": "StandardScaler + LogisticRegression",
+  "split_seeds": [
+    20261109,
+    20262109
+  ],
+  "split_proportions": {
+    "meta_train": 0.5,
+    "calibration": 0.25,
+    "test": 0.25
+  },
+  "split_method": "Stratified train_test_split within each OOF fold; first split creates meta-training and remainder; second split divides remainder into calibration and test.",
+  "target_calibration_error_recall": 0.9,
+  "threshold_rule": "Threshold selected from calibration error scores only; test samples flagged when risk score >= threshold.",
+  "bootstrap": {
+    "replicates": 3000,
+    "seed": 20261110,
+    "method": "Paired fold-stratified image-cluster percentile bootstrap",
+    "confidence_interval": "95% unadjusted percentile interval"
+  },
+  "cnn_retraining": false
+}
